@@ -92,7 +92,9 @@ async function imageUrlToFile(url, fileName) {
 async function uploadFileInfo(file) {
 	let formData = new FormData();
 	formData.append("image", file);
-	var { data } = await axios.post('http://uimstest.2045.site:5001/ocr', formData)
+	// 这里是使用ddddocr部署的OCR识别（https://github.com/sml2h3/ddddocr）
+	let ocrUrl = 'http://uimstest.2045.site:5001/ocr'
+	var { data } = await axios.post(ocrUrl, formData)
 	return data
 }
 
