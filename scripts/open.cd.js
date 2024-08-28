@@ -3,7 +3,7 @@
 // @namespace         
 // @version           0.0.1
 // @author            
-// @loginURL          
+// @loginURL          https://open.cd/
 // @updateURL         
 // @expire            900000
 // @grant             cookie
@@ -11,8 +11,6 @@
 // @domain            2045.site
 // @domain            uimstest.2045.site
 // @domain            uimstest.2045.site:5001
-// @param             name 
-// @param             pwd 
 // ==/UserScript==
 
 const opts = { headers: { referer: "https://open.cd/" } };
@@ -100,5 +98,11 @@ async function uploadFileInfo(file) {
 
 
 exports.check = async function (param) {
-
+	// 使用浏览器打开登录界面，并获取窗口句柄
+	return await open("https://open.cd/", /** 调试时设置成true */ false, async (fb) => {
+		var rate = 0.5; // 间隔时间倍率,值越小脚本执行越快
+		await fb.sleep(1800 * rate)
+		let signInResult = await fb.eval(checkResult);
+		return signInResult != null
+	});
 };
